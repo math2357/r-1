@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style 3</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="box">
+        <div class="circle1">
+        </div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+
+    <script>
+        var a = 200, R = 140;
+
+
+        function createCircle(theta, id, color='red') {
+            let circle = document.getElementsByClassName("circle")[id];
+            circle.style['backgroundColor'] = color;
+            let pi = Math.PI;
+            let c = Math.cos(theta), s = Math.sin(theta);
+            let k = Math.sqrt(2)/2;
+            var r = 0;
+            let ss = Math.abs(s), cc = Math.abs(c);
+            if (cc >= k) {
+                r = (a - R*cc)/(1+cc);
+                circle.style['top'] = (a - r - (R+r)*s) + 'px';
+                if (c > 0) {
+                    circle.style['right'] = '0';
+                } else {
+                    circle.style['right'] = (2*a - 2*r) + 'px';
+                }
+            } else {
+                r = (a - R*ss)/(1+ss);
+                circle.style['right'] = (a - r - (R+r)*c) + 'px';
+                if (s > 0) {
+                    circle.style['top'] = '0';
+                } else {
+                    circle.style['top'] = (2*a-2*r) + 'px';
+                }
+            }
+            circle.style['borderRadius'] = r + 'px';
+            circle.style['width'] = (2*r) + 'px';
+            circle.style['height'] = circle.style['width'];
+        }
+
+        function init(a, r) {
+            let box = document.getElementsByClassName("box")[0];
+            box.style['width'] = (2*a) + 'px';
+            box.style['height'] = box.style['width'];
+            let circle = document.getElementsByClassName("circle1")[0];
+            circle.style['borderRadius'] = r + 'px';
+            circle.style['width'] = (2*r) + 'px';
+            circle.style['height'] = circle.style['width'];
+            circle.style['left'] = ((2*a-4)/2 - r) + 'px';
+            circle.style['top'] = ((2*a)/2 - r) + 'px';
+        }
+
+        init(a, R);
+
+        var theta = 0;
+        var id = setInterval(() => {
+            createCircle(theta, 0, 'red');
+            createCircle(theta+0.7, 1, 'orange');
+            createCircle(theta+0.7*2, 2, '#12CBC4');
+            createCircle(theta+0.7*3, 3, '#C4E538');
+            createCircle(theta+0.7*4, 4, '#0652DD');
+            createCircle(theta+0.7*5, 5, '#ED4C67');
+            createCircle(theta+0.7*6, 6, '#009432');
+            createCircle(theta+0.7*7, 7, '#FFC312');
+            createCircle(theta+0.7*8, 8, '#EE5A24');
+            theta += 0.01;
+        }, 10);
+    </script>
+</body>
+</html>
